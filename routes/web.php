@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LiteratureObservationsController;
 use App\Http\Controllers\Admin\LiteratureObservationsImportController;
 use App\Http\Controllers\Admin\PublicationsController;
 use App\Http\Controllers\Admin\TaxaController as AdminTaxaController;
+use App\Http\Controllers\Admin\TaxaImportController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\ViewGroupsController;
 use App\Http\Controllers\AnnouncementsController;
@@ -207,6 +208,12 @@ Route::prefix(LaravelLocalization::setLocale())->middleware([
             Route::get('taxa/new', [AdminTaxaController::class, 'create'])
                 ->middleware('role:admin,curator')
                 ->name('taxa.create');
+
+            Route::get('taxa/import', [TaxaImportController::class, 'index'])
+                ->name('taxa-import.index');
+
+            Route::view('taxa/import/guide', 'admin.taxon-import.guide')
+                ->name('taxa-import.guide');
 
             Route::get('users', [UsersController::class, 'index'])
                 ->middleware('can:list,App\User')

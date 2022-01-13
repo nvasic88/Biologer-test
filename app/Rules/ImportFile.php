@@ -5,6 +5,7 @@ namespace App\Rules;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\ReaderFactory;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 
 class ImportFile implements Rule
 {
@@ -46,7 +47,10 @@ class ImportFile implements Rule
      */
     private function makeReader($value)
     {
-        $reader = ReaderFactory::create(Type::CSV); // for CSV files
+
+        Str::lower(pathinfo($value->getClientOriginalName(), PATHINFO_EXTENSION)) == 'xlsx' ?
+            $reader = ReaderFactory::create(Type::XLSX) :
+            $reader = ReaderFactory::create(Type::CSV); // for CSV files
 
         $reader->open($value->getPathname());
 

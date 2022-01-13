@@ -36,6 +36,7 @@ use App\Http\Controllers\Api\ReadAnnouncementsController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TaxaController;
 use App\Http\Controllers\Api\TaxonExportsController;
+use App\Http\Controllers\Api\TaxonImportsController;
 use App\Http\Controllers\Api\TaxonPublicPhotosController;
 use App\Http\Controllers\Api\UnidentifiableFieldObservationsBatchController;
 use App\Http\Controllers\Api\UsersController;
@@ -196,6 +197,16 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('exports/{export}', [ExportsController::class, 'show'])
         ->name('api.exports.show');
+
+    // Taxa imports
+    Route::post('taxon-imports', [TaxonImportsController::class, 'store'])
+        ->name('api.taxon-imports.store');
+
+    Route::get('taxon-imports/{import}', [TaxonImportsController::class, 'show'])
+        ->name('api.taxon-imports.show');
+
+    Route::get('taxon-imports/{import}/errors', [TaxonImportsController::class, 'errors'])
+        ->name('api.taxon-imports.errors');
 
     // Announcements
     Route::get('announcements', [AnnouncementsController::class, 'index'])

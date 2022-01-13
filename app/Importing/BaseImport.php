@@ -10,6 +10,7 @@ use Box\Spout\Reader\ReaderInterface;
 use Box\Spout\Reader\SheetInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Localizable;
 
 abstract class BaseImport
@@ -55,7 +56,7 @@ abstract class BaseImport
      * List of all columns.
      *
      * @param  \App\User|null  $user
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     public static function availableColumns($user = null)
     {
@@ -207,7 +208,9 @@ abstract class BaseImport
      */
     private function makeImportReader()
     {
-        $reader = ReaderFactory::create(Type::CSV);
+        Str::lower(pathinfo($this->import->absolutePath(), PATHINFO_EXTENSION)) == 'xlsx' ?
+            $reader = ReaderFactory::create(Type::XLSX) :
+            $reader = ReaderFactory::create(Type::CSV);
 
         $reader->open($this->import->absolutePath());
 
@@ -386,7 +389,7 @@ abstract class BaseImport
     /**
      * Store import in DB.
      *
-     * @return void
+     * @return Import
      */
     public function store()
     {
