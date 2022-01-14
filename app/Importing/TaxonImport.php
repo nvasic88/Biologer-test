@@ -87,10 +87,12 @@ class TaxonImport extends BaseImport
                 'required' => false,
             ];
         })->concat([
+            # TODO: Some column must be required, that is rank and name,
+            #   but we have special field for that, so ID should work for now
             [
                 'label' => trans('labels.id'),
                 'value' => 'id',
-                'required' => false,
+                'required' => true,
             ],
             [
                 'label' => trans('labels.taxa.author'),
@@ -414,14 +416,14 @@ class TaxonImport extends BaseImport
     {
         return array_merge(
             [
-            'allochthonous' => $this->getBoolean($item, 'allochthonous'),
-            'invasive' => $this->getBoolean($item, 'invasive'),
-            'restricted' => $this->getBoolean($item, 'restricted'),
-            'uses_atlas_codes' => $this->getBoolean($item, 'uses_atlas_codes'),
-            'author' => Arr::get($item, 'author') ?: null, # $this->getAuthorOnly($item),
-            'fe_old_id' => Arr::get($item, 'fe_old_id') ?: null,
-            'fe_id' => Arr::get($item, 'fe_id') ?: null,
-        ],
+                'allochthonous' => $this->getBoolean($item, 'allochthonous'),
+                'invasive' => $this->getBoolean($item, 'invasive'),
+                'restricted' => $this->getBoolean($item, 'restricted'),
+                'uses_atlas_codes' => $this->getBoolean($item, 'uses_atlas_codes'),
+                'author' => Arr::get($item, 'author') ?: null, # $this->getAuthorOnly($item),
+                'fe_old_id' => Arr::get($item, 'fe_old_id') ?: null,
+                'fe_id' => Arr::get($item, 'fe_id') ?: null,
+            ],
             Localization::transformTranslations($this->getLocaleData($item)),
         );
     }
