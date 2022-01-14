@@ -24,8 +24,8 @@ class ImportFile implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
     public function passes($attribute, $value)
@@ -42,12 +42,11 @@ class ImportFile implements Rule
     /**
      * Make file reader.
      *
-     * @param  mixed  $value
+     * @param mixed $value
      * @return \Box\Spout\Reader\ReaderInterface
      */
     private function makeReader($value)
     {
-
         Str::lower(pathinfo($value->getClientOriginalName(), PATHINFO_EXTENSION)) == 'xlsx' ?
             $reader = ReaderFactory::create(Type::XLSX) :
             $reader = ReaderFactory::create(Type::CSV); // for CSV files
@@ -60,7 +59,7 @@ class ImportFile implements Rule
     /**
      * Check if there is at least one row with data, excluding header row if expected.
      *
-     * @param  \Box\Spout\Reader\ReaderInterface  $reader
+     * @param \Box\Spout\Reader\ReaderInterface $reader
      * @return bool
      */
     private function checkForOneRow($reader)
