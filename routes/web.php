@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LiteratureObservationsController;
 use App\Http\Controllers\Admin\LiteratureObservationsImportController;
 use App\Http\Controllers\Admin\PublicationsController;
 use App\Http\Controllers\Admin\TaxaController as AdminTaxaController;
+use App\Http\Controllers\Admin\TaxonomyController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\ViewGroupsController;
 use App\Http\Controllers\AnnouncementsController;
@@ -270,6 +271,12 @@ Route::prefix(LaravelLocalization::setLocale())->middleware([
             Route::get('publications/{publication}/edit', [PublicationsController::class, 'edit'])
                 ->middleware('can:update,publication')
                 ->name('publications.edit');
+
+            Route::get('taxonomy', [TaxonomyController::class, 'index'])
+                ->name('taxonomy.index');
+
+            Route::get('taxonomy/fetch', [TaxonomyController::class, 'fetch'])
+                ->name('taxonomy.fetch');
         });
     });
 });

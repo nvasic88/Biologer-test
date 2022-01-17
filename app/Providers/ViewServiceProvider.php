@@ -109,6 +109,10 @@ class ViewServiceProvider extends ServiceProvider
                             ['list', \App\Publication::class],
                             'admin.publications.index',
                             trans('navigation.publications')
+                        )->routeIf(
+                            auth()->user()->hasRole('admin'),
+                            'admin.taxonomy.index',
+                            trans('navigation.taxonomy')
                         )->setActiveClass('is-active')
                         ->setActiveClassOnLink()
                         ->setActiveFromRequest()
