@@ -53,6 +53,7 @@ return [
 
     'photos_disk' => env('PHOTOS_DISK', 'public'),
 
-    'taxonomy_use' => env('TAXONOMY_USE', false),
+    'taxonomy_status' => env('TAXONOMY_STATUS', false),
     'taxonomy_link' => env('TAXONOMY_LINK', ''),
+    'taxonomy_secret_key' => env('TAXONOMY_SECRET_KEY', ''),
 ];

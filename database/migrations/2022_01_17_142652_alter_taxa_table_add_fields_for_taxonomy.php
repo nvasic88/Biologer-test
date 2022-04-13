@@ -15,7 +15,6 @@ class AlterTaxaTableAddFieldsForTaxonomy extends Migration
     {
         Schema::table('taxa', function (Blueprint $table) {
             $table->integer('taxonomy_id')->nullable()->unique()->default(null);
-            $table->boolean('can_update')->default(false);
         });
     }
 
@@ -28,7 +27,6 @@ class AlterTaxaTableAddFieldsForTaxonomy extends Migration
     {
         Schema::table('taxa', function (Blueprint $table) {
             $table->dropColumn('taxonomy_id');
-            $table->dropColumn('can_update');
         });
     }
 }

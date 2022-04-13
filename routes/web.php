@@ -275,8 +275,17 @@ Route::prefix(LaravelLocalization::setLocale())->middleware([
             Route::get('taxonomy', [TaxonomyController::class, 'index'])
                 ->name('taxonomy.index');
 
-            Route::get('taxonomy/fetch', [TaxonomyController::class, 'fetch'])
-                ->name('taxonomy.fetch');
+            Route::get('taxonomy/check', [TaxonomyController::class, 'check'])
+                ->name('taxonomy.check');
+
+            Route::get('taxonomy/connect', [TaxonomyController::class, 'connect'])
+                ->name('taxonomy.connect');
+
+            Route::get('taxonomy/disconnect', [TaxonomyController::class, 'disconnect'])
+                ->name('taxonomy.disconnect');
+
+            Route::get('taxonomy/search', [TaxonomyController::class, 'search'])
+                ->name('taxonomy.search');
         });
     });
 });
