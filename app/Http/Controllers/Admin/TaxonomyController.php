@@ -77,7 +77,6 @@ class TaxonomyController
         $data['key'] = config('biologer.taxonomy_secret_key');
 
         $response = Http::post($link.'/api/taxonomy/disconnect', $data);
-        # dd($response->body());
         if ($response->status() == 200) {
             $taxa = Taxon::whereNotNull('taxonomy_id')->get();
             foreach ($taxa as $taxon) {
@@ -136,5 +135,4 @@ class TaxonomyController
 
         return response('Fetching done...', 200);
     }
-
 }

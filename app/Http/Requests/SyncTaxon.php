@@ -106,7 +106,6 @@ class SyncTaxon extends FormRequest
 
     protected function getRedListIds(array $data, $redLists)
     {
-
         $red_list_map = [];
         foreach ($data['red_lists'] as $red_list) {
             $red_list_map[$redLists[$red_list['id']]] = ['category' => $red_list['pivot']['category']];
